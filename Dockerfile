@@ -1,4 +1,4 @@
-FROM amsokol/oraclelinux-java:7.1-7u75
+FROM amsokol/centos-openjdk:7-1.7.0
 MAINTAINER Alexander Sokolovsky <amsokol@gmail.com>
 
 # User root user to install software
@@ -16,8 +16,8 @@ RUN groupadd -r jboss -g 1000 && useradd -u 1000 -r -g jboss -m -d /opt/jboss -s
 # Set the WILDFLY_VERSION env variable
 ENV WILDFLY_VERSION 8.1.0.Final
 
-ADD assets/wildfly-$WILDFLY_VERSION.tar.gz /opt/jboss/
-RUN mv /opt/jboss/wildfly-$WILDFLY_VERSION /opt/jboss/wildfly
+RUN curl http://download.jboss.org/wildfly/8.1.0.Final/wildfly-$WILDFLY_VERSION.tar.gz | tar xvz
+RUN mv wildfly-$WILDFLY_VERSION /opt/jboss/wildfly
 RUN chown -R jboss:jboss /opt/jboss
 
 # Specify the user which should be used to execute all commands below
@@ -25,9 +25,6 @@ USER jboss
 
 # Set the working directory to jboss' user home directory
 WORKDIR /opt/jboss
-
-# Set the JAVA_HOME variable to make it clear where Java is located
-ENV JAVA_HOME /usr/java/latest
 
 # Set the JBOSS_HOME env variable
 ENV JBOSS_HOME /opt/jboss/wildfly

@@ -1,1 +1,1 @@
-docker start oraclelinux7.1-java7u75-wildfly8.1.0
+docker start -i centos7-openjdk7-wildfly8.1.0

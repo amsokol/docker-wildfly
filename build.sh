@@ -1,1 +1,1 @@
-docker build -t="amsokol/oraclelinux-java-wildfly:7.1-7u75-8.1.0" .
+docker build -t="amsokol/centos-openjdk-wildfly:7-1.7.0-8.1.0" .
